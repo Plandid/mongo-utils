@@ -12,8 +12,12 @@ export function getUrl() {
     return url;
 }
 
-export function getdatabaseName() {
+export function getDatabaseName() {
     return dbName;
+}
+
+export async function getDatabase(databaseName) {
+    return await client.db(databaseName);
 }
 
 export async function connect(urlString) {
@@ -36,10 +40,6 @@ export async function disconnect() {
         console.error(error);
         return false;
     }
-}
-
-export function getdb(databaseName) {
-    return client.db(databaseName);
 }
 
 export async function mongoCollectionMethods(router, collection, pathFilter={}, recordFilter={}) {
