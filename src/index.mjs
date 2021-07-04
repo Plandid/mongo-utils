@@ -16,8 +16,8 @@ export function getDatabaseName() {
     return dbName;
 }
 
-export async function getDatabase(databaseName) {
-    return await client.db(databaseName);
+export async function getDatabase() {
+    return await client.db(dbName);
 }
 
 export async function connect(urlString) {
