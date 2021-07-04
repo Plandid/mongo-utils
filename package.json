@@ -1,0 +1,23 @@
+{
+  "name": "@plandid/mongo-utils",
+  "version": "0.0.0",
+  "description": "Utilities for mongodb apps for Plandid LLC",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "scripts-setup"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Plandid/mongo-utils.git"
+  },
+  "author": "Carl Schader",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Plandid/mongo-utils/issues"
+  },
+  "homepage": "https://github.com/Plandid/mongo-utils#readme",
+  "dependencies": {
+    "@plandid/node-scripts": "^1.0.17"
+  }
+}
