@@ -1,10 +1,26 @@
 import { MongoClient } from 'mongodb';
 
 let client;
+let url;
+let dbName;
 
-export async function connect(url) {
+export function getClient() {
+    return client;
+}
+
+export function getUrl() {
+    return url;
+}
+
+export function getdatabaseName() {
+    return dbName;
+}
+
+export async function connect(urlString) {
+    url = new URL(urlString);
+    dbName = url.pathname;
     try {
-        client = new MongoClient(url, {useNewUrlParser: true, useUnifiedTopology: true});
+        client = new MongoClient(urlString, {useNewUrlParser: true, useUnifiedTopology: true});
         await client.connect();
     } catch (error) {
         console.error(error);
@@ -22,7 +38,7 @@ export async function disconnect() {
     }
 }
 
-export function fetchdb(databaseName) {
+export function getdb(databaseName) {
     return client.db(databaseName);
 }
 
