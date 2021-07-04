@@ -7,9 +7,9 @@ const process = require('process');
 
 try {
     execSync('npm run test');
-} catch (e) {
-    console.log(e);
+} catch {
     console.log('failed tests');
+    process.exit(1);
 }
 
 var packageJson = JSON.parse(
