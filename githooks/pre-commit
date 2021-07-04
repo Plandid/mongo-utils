@@ -5,8 +5,12 @@ const path = require('path');
 const fs = require('fs');
 const process = require('process');
 
-const status = execSync('npm run test');
-console.log(status)
+try {
+    const result = execSync('npm run test');
+    console.log(result);
+} catch (e) {
+    console.log(e);
+}
 
 var packageJson = JSON.parse(
     fs.readFileSync(path.join(process.cwd(), 'package.json'))
@@ -15,3 +19,4 @@ var packageJson = JSON.parse(
 const [major, minor, patch] = packageJson.version.split('.');
 packageJson.version = major + '.' + minor + '.' + (parseInt(patch) + 1).toString();
 fs.writeFileSync(path.join(process.cwd(), 'package.json'), JSON.stringify(packageJson, null, 2));
+
