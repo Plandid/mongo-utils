@@ -46,7 +46,7 @@ async function main() {
 
     await client.close();
 
-    console.log(`database ${databaseName} has been updated`);
+    console.log(`database ${getdbName(url)} has been updated`);
     process.exit(0);
 }
 

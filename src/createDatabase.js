@@ -57,7 +57,7 @@ async function main() {
 
     await client.close();
 
-    console.log(`database: ${databaseName} has been created`);
+    console.log(`database: ${getdbName(url)} has been created`);
     process.exit(0);
 }
 

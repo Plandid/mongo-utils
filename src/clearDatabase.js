@@ -25,7 +25,7 @@ async function main() {
 
     await client.close();
 
-    console.log(`database: ${databaseName} has been cleared of all documents`)
+    console.log(`database: ${getdbName(url)} has been cleared of all documents`)
     process.exit(0);
 }
 

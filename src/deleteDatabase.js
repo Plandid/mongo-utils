@@ -22,7 +22,7 @@ async function main() {
 
     await client.close();
 
-    console.log(`database: ${databaseName} has been deleted`)
+    console.log(`database: ${getdbName(url)} has been deleted`)
     process.exit(0);
 };
 
