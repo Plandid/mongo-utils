@@ -1,6 +1,7 @@
 const { MongoClient } = require("mongodb");
 const fs = require("fs");
 const process = require('process');
+const { getdbName } = require('./index');
 
 require('dotenv').config();
 
