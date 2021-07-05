@@ -1,27 +1,13 @@
 const { MongoClient } = require('mongodb');
 
-let client;
-let dbName;
-let db;
-
-function getClient() {
-    return client;
+function getDatabaseName(url) {
+    return new URL(url).pathname.substring(1);
 }
 
-function getDatabaseName() {
-    return dbName;
-}
-
-function getDatabase() {
-    return db;
-}
-
-async function connect(urlString) {
-    dbName = new URL(urlString).pathname.substring(1);
+async function connect(url) {
     try {
-        client = new MongoClient(urlString, {useNewUrlParser: true, useUnifiedTopology: true});
-        await client.connect();
-        db = client.db(dbName);
+        client = new MongoClient(url, {useNewUrlParser: true, useUnifiedTopology: true});
+        return client.connect();
     } catch (error) {
         console.error(error);
         process.exit(1);
@@ -107,9 +93,7 @@ async function mongoCollectionApiMethods(router, collection, pathFilter={}, reco
 }
 
 module.exports = {
-    getClient: getClient,
     getDatabaseName: getDatabaseName,
-    getDatabase: getDatabase,
     connect: connect,
     disconnect: disconnect,
     mongoCollectionApiMethods: mongoCollectionApiMethods 
