@@ -1,26 +1,26 @@
-import { MongoClient } from 'mongodb';
+const { MongoClient } = require('mongodb');
 
 let client;
 let url;
 let dbName;
 
-export function getClient() {
+function getClient() {
     return client;
 }
 
-export function getUrl() {
+function getUrl() {
     return url;
 }
 
-export function getDatabaseName() {
+function getDatabaseName() {
     return dbName;
 }
 
-export async function getDatabase() {
+async function getDatabase() {
     return await client.db(dbName);
 }
 
-export async function connect(urlString) {
+async function connect(urlString) {
     url = new URL(urlString);
     dbName = url.pathname;
     try {
@@ -32,7 +32,7 @@ export async function connect(urlString) {
     }
 }
 
-export async function disconnect() {
+async function disconnect() {
     try {
         await client.close();
         return true;
@@ -42,7 +42,7 @@ export async function disconnect() {
     }
 }
 
-export async function mongoCollectionMethods(router, collection, pathFilter={}, recordFilter={}) {
+async function mongoCollectionApiMethods(router, collection, pathFilter={}, recordFilter={}) {
     router.get("/:_id", async function(req, res, next) {
         try {
             const { filter } = useFilter(req, pathFilter, {});
@@ -108,4 +108,14 @@ export async function mongoCollectionMethods(router, collection, pathFilter={}, 
             next(error);
         }
     });
+}
+
+module.exports = {
+    getClient: getClient,
+    getUrl: getUrl,
+    getDatabaseName: getDatabaseName,
+    getDatabase: getDatabase,
+    connect: connect,
+    disconnect: disconnect,
+    mongoCollectionApiMethods: mongoCollectionApiMethods 
 }
