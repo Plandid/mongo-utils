@@ -39,7 +39,7 @@ async function disconnect() {
 }
 
 async function mongoCollectionApiMethods(router, collection, pathFilter={}, recordFilter={}) {
-    router.get("/:_id", async function(req, res, next) {
+    router.get('/:_id', async function(req, res, next) {
         try {
             const { filter } = useFilter(req, pathFilter, {});
             let data = await collection.find(filter);
@@ -50,7 +50,7 @@ async function mongoCollectionApiMethods(router, collection, pathFilter={}, reco
         }
     });
 
-    router.post("/", async function(req, res, next) {
+    router.post('/', async function(req, res, next) {
         try {
             const { record } = useFilter(req, {}, recordFilter);
             await collection.insertOne(record);
@@ -61,7 +61,7 @@ async function mongoCollectionApiMethods(router, collection, pathFilter={}, reco
         }
     });
 
-    router.post("/:_id", async function(req, res, next) {
+    router.post('/:_id', async function(req, res, next) {
         try {
             const { filter, record } = useFilter(req, pathFilter, recordFilter);
             await collection.insertOne({ ...filter, ...record });
@@ -72,7 +72,7 @@ async function mongoCollectionApiMethods(router, collection, pathFilter={}, reco
         }
     });
 
-    router.put("/:_id", async function(req, res, next) {
+    router.put('/:_id', async function(req, res, next) {
         try {
             const { filter, record } = useFilter(req, pathFilter, recordFilter);
             await collection.replaceOne(filter, { ...filter, ...record }, { upsert: true });
@@ -83,7 +83,7 @@ async function mongoCollectionApiMethods(router, collection, pathFilter={}, reco
         }
     });
 
-    router.patch("/:_id", async function(req, res, next) {
+    router.patch('/:_id', async function(req, res, next) {
         try {
             const { filter, record } = useFilter(req, pathFilter, recordFilter);
             await collection.updateOne(filter, {$set: record});
@@ -94,7 +94,7 @@ async function mongoCollectionApiMethods(router, collection, pathFilter={}, reco
         }
     });
 
-    router.delete("/:_id", async function(req, res, next) {
+    router.delete('/:_id', async function(req, res, next) {
         try {
             const { filter } = useFilter(req, pathFilter, {});
             await collection.deleteOne(filter);

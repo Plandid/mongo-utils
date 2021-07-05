@@ -1,8 +1,14 @@
 {
   "name": "@plandid/mongo-utils",
-  "version": "0.4.-1",
+  "version": "0.4.0",
   "description": "Utilities for mongodb apps for Plandid LLC",
   "main": "./src/index.js",
+  "bin": {
+    "create-database": "./src/createDatabase.js",
+    "delete-database": "./src/deleteDatabase.js",
+    "clear-database": "./src/clearDatabase.js",
+    "update-database": "./src/updateDatabase.js"
+  },
   "scripts": {
     "test": "jest",
     "prepare": "scripts-setup"
@@ -22,6 +28,7 @@
     "jest": "^27.0.6"
   },
   "dependencies": {
+    "dotenv": "^10.0.0",
     "mongodb": "^3.6.9"
   }
 }
