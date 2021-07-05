@@ -1,6 +1,4 @@
-import pkg from 'mongodb';
-
-const { MongoClient } = pkg;
+import { MongoClient } from 'mongodb';
 
 let client;
 let url;
