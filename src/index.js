@@ -108,7 +108,7 @@ async function mongoCollectionApiMethods(router, collection, pathFilter={}, reco
 
 module.exports = {
     getClient: getClient,
-    getdbeName: getdbName,
+    getdbName: getdbName,
     getdb: getdb,
     connect: connect,
     disconnect: disconnect,
