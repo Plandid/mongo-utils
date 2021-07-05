@@ -2,6 +2,7 @@ const { MongoClient, ObjectID } = require('mongodb');
 
 let client;
 let dbName;
+let db;
 
 function getClient() {
     return client;
@@ -11,15 +12,12 @@ function getDatabaseName() {
     return dbName;
 }
 
-async function getDatabase() {
-    return await client.db(dbName);
-}
-
 async function connect(urlString) {
     dbName = new URL(urlString).pathname.substring(1);
     try {
         client = new MongoClient(urlString, {useNewUrlParser: true, useUnifiedTopology: true});
         await client.connect();
+        db = client.db(dbName);
     } catch (error) {
         console.error(error);
         process.exit(1);
@@ -106,9 +104,9 @@ async function mongoCollectionApiMethods(router, collection, pathFilter={}, reco
 
 module.exports = {
     ObjectID: ObjectID,
+    db: db,
     getClient: getClient,
     getDatabaseName: getDatabaseName,
-    getDatabase: getDatabase,
     connect: connect,
     disconnect: disconnect,
     mongoCollectionApiMethods: mongoCollectionApiMethods 
