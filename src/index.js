@@ -15,15 +15,10 @@ async function getDatabase() {
     return await client.db(dbName);
 }
 
-async function connect(url) {
-    if (url.indexOf('/') !== -1) {
-        dbName = url.substring(url.indexOf('mongodb.net/') + 12, url.lastIndexOf('?'));
-    } else {
-        dbName = url.substring(url.indexOf('mongodb.net/') + 12);
-    }
-    
+async function connect(urlString) {
+    dbName = new URL(urlString).pathname;
     try {
-        client = new MongoClient(url, {useNewUrlParser: true, useUnifiedTopology: true});
+        client = new MongoClient(urlString, {useNewUrlParser: true, useUnifiedTopology: true});
         await client.connect();
     } catch (error) {
         console.error(error);
