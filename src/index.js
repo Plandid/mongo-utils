@@ -7,7 +7,7 @@ function getDatabaseName(url) {
 async function connect(url) {
     try {
         client = new MongoClient(url, {useNewUrlParser: true, useUnifiedTopology: true});
-        return client.connect();
+        return await client.connect();
     } catch (error) {
         console.error(error);
         process.exit(1);
