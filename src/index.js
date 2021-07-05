@@ -1,4 +1,4 @@
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectID } = require('mongodb');
 
 let client;
 let url;
@@ -111,6 +111,7 @@ async function mongoCollectionApiMethods(router, collection, pathFilter={}, reco
 }
 
 module.exports = {
+    ObjectID: ObjectID,
     getClient: getClient,
     getUrl: getUrl,
     getDatabaseName: getDatabaseName,
