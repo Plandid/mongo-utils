@@ -12,7 +12,7 @@ if (!url) {
     console.log('no DB_URL in .env or no url passed');
 }
 
-(async function() {
+async function main() {
     const client = new MongoClient(url, {useNewUrlParser: true, useUnifiedTopology: true});
 
     await client.connect();
@@ -24,4 +24,6 @@ if (!url) {
 
     console.log(`database: ${databaseName} has been deleted`)
     process.exit(0);
-})()
+};
+
+main();
