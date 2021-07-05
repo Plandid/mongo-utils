@@ -1,6 +1,6 @@
 {
   "name": "@plandid/mongo-utils",
-  "version": "0.4.7",
+  "version": "0.4.8",
   "description": "Utilities for mongodb apps for Plandid LLC",
   "main": "./src/index.js",
   "bin": {
@@ -28,6 +28,7 @@
     "jest": "^27.0.6"
   },
   "dependencies": {
+    "@plandid/server-utils": "^0.21.7",
     "dotenv": "^10.0.0",
     "mongodb": "^3.6.9"
   }
