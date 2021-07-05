@@ -1,8 +1,8 @@
 {
   "name": "@plandid/mongo-utils",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Utilities for mongodb apps for Plandid LLC",
-  "main": "./src/index.js",
+  "main": "./src/index.mjs",
   "scripts": {
     "test": "jest",
     "prepare": "scripts-setup"
