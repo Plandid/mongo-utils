@@ -16,7 +16,7 @@ async function getDatabase() {
 }
 
 async function connect(urlString) {
-    dbName = new URL(urlString).pathname;
+    dbName = new URL(urlString).pathname.substring(1);
     try {
         client = new MongoClient(urlString, {useNewUrlParser: true, useUnifiedTopology: true});
         await client.connect();
