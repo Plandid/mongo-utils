@@ -1,6 +1,6 @@
 {
   "name": "@plandid/mongo-utils",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "Utilities for mongodb apps for Plandid LLC",
   "main": "./src/index.mjs",
   "scripts": {
@@ -19,6 +19,7 @@
   "homepage": "https://github.com/Plandid/mongo-utils#readme",
   "dependencies": {
     "@plandid/node-scripts": "^1.2.5",
-    "jest": "^27.0.6"
+    "jest": "^27.0.6",
+    "mongodb": "^3.6.9"
   }
 }
