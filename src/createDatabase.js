@@ -46,7 +46,7 @@ async function main() {
     }
 
     if (fs.existsSync('./exampleData.js')) {
-        const examples = require('./exampleData.js');
+        const examples = require('./exampleData');
         for (const collection in examples) {
             await db.collection(collection).insertOne(examples[collection]);
             console.log(`inserted example for collection: ${collection}`);
