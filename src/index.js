@@ -1,15 +1,10 @@
 const { MongoClient, ObjectID } = require('mongodb');
 
 let client;
-let url;
 let dbName;
 
 function getClient() {
     return client;
-}
-
-function getUrl() {
-    return url;
 }
 
 function getDatabaseName() {
@@ -20,11 +15,15 @@ async function getDatabase() {
     return await client.db(dbName);
 }
 
-async function connect(urlString) {
-    url = new URL(urlString);
-    dbName = url.pathname;
+async function connect(url) {
+    if (url.indexOf('/') !== -1) {
+        dbName = url.substring(url.indexOf('mongodb.net/') + 12, url.lastIndexOf('?'));
+    } else {
+        dbName = url.substring(url.indexOf('mongodb.net/') + 12);
+    }
+    
     try {
-        client = new MongoClient(urlString, {useNewUrlParser: true, useUnifiedTopology: true});
+        client = new MongoClient(url, {useNewUrlParser: true, useUnifiedTopology: true});
         await client.connect();
     } catch (error) {
         console.error(error);
