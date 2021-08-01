@@ -21,12 +21,16 @@ async function main() {
     if (fs.existsSync('./schemas.json')) {
         const schemas = JSON.parse(fs.readFileSync('./schemas.json'));
         for (let schemaName in schemas) {
-            await db.createCollection(schemaName, {
-                validator: {
-                    $jsonSchema: schemas[schemaName]
-                }
-            });
-            console.log(`created collection: ${schemaName}`);
+            try {
+                await db.createCollection(schemaName, {
+                    validator: {
+                        $jsonSchema: schemas[schemaName]
+                    }
+                });
+                console.log(`created collection: ${schemaName}`);
+            } catch (error) {
+                console.error(schemaName +': ' + error);
+            }
         }
     } else {
         console.error('error: no schemas.json');
@@ -37,22 +41,16 @@ async function main() {
         const indexes = JSON.parse(fs.readFileSync('./indexes.json'));
         for (const collection in indexes) {
             for (const kvp of indexes[collection]) {
-                await db.collection(collection).createIndex(kvp.index, kvp.options);
+                try {
+                    await db.collection(collection).createIndex(kvp.index, kvp.options);
+                } catch (error) {
+                    console.error(collection + ', index: ' + error);
+                }
             }
             console.log(`created indexes for collection: ${collection}`);
         }
     } else {
         console.log('no indexes.json');
-    }
-
-    if (fs.existsSync('./exampleData.js')) {
-        const examples = require(process.cwd() + '/exampleData');
-        for (const collection in examples) {
-            await db.collection(collection).insertOne(examples[collection]);
-            console.log(`inserted example for collection: ${collection}`);
-        }
-    } else {
-        console.log('no exampleData.js');
     }
 
     await client.close();

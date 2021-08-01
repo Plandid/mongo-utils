@@ -21,12 +21,16 @@ async function main() {
     if (fs.existsSync('./schemas.json')) {
         const schemas = JSON.parse(fs.readFileSync('./schemas.json'));
         for (let schemaName in schemas) {
-            await db.command({
-                collMod: schemaName,
-                validator: {
-                    $jsonSchema: schemas[schemaName]
-                }
-            });
+            try {
+                await db.command({
+                    collMod: schemaName,
+                    validator: {
+                        $jsonSchema: schemas[schemaName]
+                    }
+                });
+            } catch (error) {
+                console.error(schemaName + ': ' + error);
+            }
         }
     } else {
         console.error('error: no schemas.json');
@@ -37,7 +41,11 @@ async function main() {
         const indexes = JSON.parse(fs.readFileSync('./indexes.json'));
         for (const collection in indexes) {
             for (const kvp of indexes[collection]) {
-                await db.collection(collection).createIndex(kvp.index, kvp.options);
+                try {
+                    await db.collection(collection).createIndex(kvp.index, kvp.options);
+                } catch (error) {
+                    console.error(collection + ', index: ' + error);
+                }
             }
         }
     } else {
